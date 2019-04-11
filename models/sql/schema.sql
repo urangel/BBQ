@@ -1,0 +1,10 @@
+DROP DATABASE IF EXISTS bbq_db;
+CREATE DATABASE bbq_db;
+USE bbq_db;
+
+CREATE TABLE bbq(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    location VARCHAR(45) NOT NULL,
+    smoked BIT NOT NULL DEFAULT 0
+);
+

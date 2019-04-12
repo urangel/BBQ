@@ -22,13 +22,21 @@ router.get("/data", (req, res) => {
     });
 });
 
-router.put("/data/:id", (req, res) => {
-    connection.query("UPDATE bbq SET smoked = 1 WHERE id = ?;", [req.params.id], (err, data) => {
+router.put("/", function(req, res) {
+    connection.query("UPDATE bbq SET smoked = 1 WHERE id = ?;", [req.body.id], (err, data) => {
         if(err) throw err;
         console.log("smoked to 1 in sql");
     })
-    res.redirect("/");
+    res.send("updated");
 }) ;
+
+router.delete("/", function (req, rex) {
+    connection.query("DELETE FROM bbq WHERE id = ?;", [req.body.id], (err, data)=>{
+        if(err) throw err;
+        console.log("deleted from sql");
+    });
+    res.send("deleted")
+})
 
 router.post("/data/post", (req, res) =>{
     console.log(req.body.location); 

@@ -18,8 +18,8 @@
                 {{#if smoked}}
                     <li>
                         <p>{{location}}</p>
-                        <button class="smokeButton" id="{{id}}">
-                            Smoke!
+                        <button class="deleteButton" id="{{id}}">
+                            Toss
                         </button>
                     </li>
                 {{/if}}
@@ -40,12 +40,32 @@ $(function(){
         let id = $(this).attr("id");
         
 
-        $.ajax("/data/" + id, {
+        $.ajax("/", {
             type: "PUT",
-            data: id
-        }).then((response)=>{
+            data: {
+                id: id}
+        }).then(function(){
             console.log("smoked");
+            location.reload();
         });
+
+
+
+    });
+    $(".deleteButton").on("click", function(){
+        let id = $(this).attr("id");
+        
+
+        $.ajax("/", {
+            type: "DELETE",
+            data: {
+                id: id}
+        }).then(function(){
+            console.log("tossed");
+            location.reload();
+        });
+
+
 
     });
 });

@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-6">
+        <h3>Heatin' up</h3>
+        {{#each list}}
+            {{#unless smoked}}
+                <li>
+                    <p>{{location}}</p>
+                    <button class="smokeButton" id="{{id}}">
+                        Smoke!
+                    </button>
+                </li>
+            {{/unless}}
+        {{/each}}
+    </div>
+    <div class="col-6">
+        <h3>Smoked</h3>
+            {{#each list}}
+                {{#if smoked}}
+                    <li>
+                        <p>{{location}}</p>
+                        <button class="smokeButton" id="{{id}}">
+                            Smoke!
+                        </button>
+                    </li>
+                {{/if}}
+            {{/each}}
+    </div>
+</div>
+
+
+
+{{!-- {{#if}}{{/if}}
+
+{{#unless}} {{/unless}}
+
+    {{> partial}} --}}
+<script>
+$(function(){
+    $(".smokeButton").on("click", function(){
+        let id = $(this).attr("id");
+        
+
+        $.ajax("/data/" + id, {
+            type: "PUT",
+            data: id
+        }).then((response)=>{
+            console.log("smoked");
+        });
+
+    });
+});
+
+</script>

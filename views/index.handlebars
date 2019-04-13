@@ -2,27 +2,27 @@
     <div class="col-6">
         <h3>Heatin' up</h3>
         {{#each list}}
-            {{#if smoked}}
+            {{#unless smoked}}
                 <li>
                     <p class = "smokeText">{{location}}</p>
                     <button class="smokeButton" id="{{id}}">
                         Smoke!
                     </button>
                 </li>
-            {{/if}}
+            {{/unless}}
         {{/each}}
     </div>
     <div class="col-6">
         <h3>Smoked</h3>
             {{#each list}}
-                {{#unless smoked}}
+                {{#if smoked}}
                     <li>
                         <p>{{location}}</p>
                         <button class="deleteButton" id="{{id}}">
                             Toss
                         </button>
                     </li>
-                {{/unless}}
+                {{/if}}
             {{/each}}
     </div>
 </div>

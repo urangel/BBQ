@@ -2,7 +2,7 @@
     <div class="col-6">
         <h3>Heatin' up</h3>
         {{#each list}}
-            {{#if smoked = 0}}
+            {{#if smoked}}
                 <li>
                     <p class = "smokeText">{{location}}</p>
                     <button class="smokeButton" id="{{id}}">
@@ -15,14 +15,14 @@
     <div class="col-6">
         <h3>Smoked</h3>
             {{#each list}}
-                {{#if smoked = 1}}
+                {{#unless smoked}}
                     <li>
                         <p>{{location}}</p>
                         <button class="deleteButton" id="{{id}}">
                             Toss
                         </button>
                     </li>
-                {{/if}}
+                {{/unless}}
             {{/each}}
     </div>
 </div>

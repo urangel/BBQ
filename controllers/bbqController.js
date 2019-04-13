@@ -1,18 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../config/connection");
-
-// router.use(function timeLog (req, res, next){
-//     console.log("Time :" + Date.now());
-//     next();
-// });
+const bbq = require("../models/bbq");
 
 router.get("/", (req, res) => {
     console.log("you're home!");
-    connection.query("SELECT * FROM bbq", (err, data)=>{
-        if(err) throw err;
+    bbq.selectAll(function(data) {
         res.render("index", {list: data});
-    });
+      });
 });
 
 router.get("/data", (req, res) => {
@@ -23,28 +18,22 @@ router.get("/data", (req, res) => {
 });
 
 router.put("/", function(req, res) {
-    connection.query("UPDATE bbq SET smoked = 1 WHERE id = ?;", [req.body.id], (err, data) => {
-        if(err) throw err;
-        console.log("smoked to 1 in sql");
+    bbq.updateOne(req.body.id, function(data){
+        res.send("updated");
     })
-    res.send("updated");
 }) ;
 
 router.delete("/", function (req, res) {
-    connection.query("DELETE FROM bbq WHERE id = ?;", [req.body.id], (err, data)=>{
-        if(err) throw err;
-        console.log("deleted from sql");
-    });
-    res.send("deleted")
+    bbq.deleteOne(req.body.id, function(data){
+        res.send("deleted");
+    })
 })
 
 router.post("/data/post", (req, res) =>{
     console.log(req.body.location); 
-    connection.query("INSERT INTO bbq(location) VALUES (?);", [req.body.location], (err, data) =>{
-        if(err) throw err;
-        console.log("values inserted");
-        console.log(data);
-        res.redirect("/");
+
+    bbq.insertOne(req.body.location, function(data){
+        res.json(data);
     });
 });
 

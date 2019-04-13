@@ -18,5 +18,3 @@ app.use("", controller);
 app.listen(PORT, () =>{
     console.log("Listening on port: " + PORT);
 })
-
-// orm.selectAll(()=> console.log("hello"));

@@ -1,44 +1,42 @@
 <div class="row">
     <div class="col-6">
-        <h3>Heatin' up</h3>
-        {{#each list}}
-            {{#unless smoked}}
-                <li>
-                    <p class = "smokeText">{{location}}</p>
-                    <button class="smokeButton" id="{{id}}">
-                        Smoke!
-                    </button>
-                </li>
-            {{/unless}}
-        {{/each}}
+        <h3 class="heat">Heatin' up</h3>
+        <ul class="list-group">
+            {{#each list}}
+                {{#unless smoked}}
+                    <li class="list-group-item">
+                        <p class = "smokeText">{{location}}</p>
+                        <button type="button" class= "btn btn-secondary smokeButton" id="{{id}}">
+                            Smoke!
+                            <i class="fas fa-fire heat"></i>
+                        </button>
+                    </li>
+                {{/unless}}
+            {{/each}}
+        </ul>
     </div>
     <div class="col-6">
-        <h3>Smoked</h3>
+        <h3 id="smoked">Smoked</h3>
+        <ul class="list-group">
             {{#each list}}
                 {{#if smoked}}
-                    <li>
-                        <p>{{location}}</p>
-                        <button class="deleteButton" id="{{id}}">
+                    <li class="list-group-item">
+                        <p class = "deleteText">{{location}}</p>
+                        <button type="button" class= "btn btn-dark deleteButton" id="{{id}}">
                             Toss
+                            <i class="fas fa-trash"></i>
                         </button>
                     </li>
                 {{/if}}
             {{/each}}
+        </ul>
     </div>
 </div>
 
-
-
-{{!-- {{#if}}{{/if}}
-
-{{#unless}} {{/unless}}
-
-    {{> partial}} --}}
 <script>
 $(function(){
     $(".smokeButton").on("click", function(){
         let id = $(this).attr("id");
-        
 
         $.ajax("/", {
             type: "PUT",
@@ -48,13 +46,9 @@ $(function(){
             console.log("smoked");
             location.reload();
         });
-
-
-
     });
     $(".deleteButton").on("click", function(){
         let id = $(this).attr("id");
-        
 
         $.ajax("/", {
             type: "DELETE",
@@ -64,9 +58,6 @@ $(function(){
             console.log("tossed");
             location.reload();
         });
-
-
-
     });
 });
 

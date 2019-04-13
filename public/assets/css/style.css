@@ -10,6 +10,14 @@ body{
 
 }
 
-.smokeText, .smokeButton {
+.deleteButton, .deleteText, .smokeText, .smokeButton {
     display: inline;
+}
+
+.smokeButton, .deleteButton {
+    float: right;
+}
+
+.heat {
+    color: darkred;
 }

@@ -5,6 +5,7 @@ const orm = {
         connection.query("SELECT * FROM bbq;", function(err, data){
             if (err) throw err;
             console.log(data);
+            cb(data);
         });
         console.log("selecting all");
     },
@@ -13,6 +14,9 @@ const orm = {
     },
     updateOne: function(){
         console.log("updating one");
+    },
+    deleteOne: function(){
+
     }
 }
 

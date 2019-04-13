@@ -30,7 +30,7 @@ router.put("/", function(req, res) {
     res.send("updated");
 }) ;
 
-router.delete("/", function (req, rex) {
+router.delete("/", function (req, res) {
     connection.query("DELETE FROM bbq WHERE id = ?;", [req.body.id], (err, data)=>{
         if(err) throw err;
         console.log("deleted from sql");
